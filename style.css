@@ -1,0 +1,137 @@
+
+html { box-sizing: border-box; }
+*, *:before, *:after { box-sizing: inherit; }
+body {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.wrapper { width: 400px; }
+
+
+
+/* ── 10. CSS Custom Properties ── */
+:root {
+  --color-screen:     #1a1a1a;
+  --color-number:     #e0e0e0;
+  --color-operator:   #f0a500;
+  --color-text-dark:  #1a1a1a;
+  --color-text-light: #ffffff;
+  --gap-size: 2px;
+}
+
+/* ── Screen — uses Grid (1, 2, 3, 6, 7) ── */
+.calculator-screen {
+  background-color: var(--color-screen);
+
+  /* 1. display: grid — turns screen into a grid */
+  display: grid;
+
+  /* 2. one column that fills the full width */
+  grid-template-columns: 1fr;
+
+  /* 3. one row, 80px tall */
+  grid-template-rows: 80px;
+
+  /* 6. push content to the RIGHT horizontally */
+  justify-items: end;
+
+  /* 7. push content to the BOTTOM vertically */
+  align-items: end;
+
+  padding: 0 16px 10px 16px;
+}
+
+#display {
+  color: var(--color-text-light);
+  font-size: 2rem;
+  font-family: sans-serif;
+  word-break: break-all;
+}
+
+/* ── Button Grid (1, 2, 5) ── */
+.calculator-buttons {
+  /* 1. display: grid */
+  display: grid;
+
+  /* 2. 4 equal-width columns */
+  grid-template-columns: repeat(4, 1fr);
+
+  /* 5. gap between every cell */
+  gap: var(--gap-size);
+
+  background-color: #888;
+}
+
+/* ── Base Button ── */
+.btn {
+  font-size: 1.3rem;
+  font-family: sans-serif;
+  padding: 22px 0;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: filter 0.1s ease;
+
+  /* 6 + 7. center the label inside each button cell */
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+/* ── Button color variants ── */
+.btn-number,
+.btn-utility {
+  background-color: var(--color-number);
+  color: var(--color-text-dark);
+}
+
+.btn-operator {
+  background-color: var(--color-operator);
+  color: var(--color-text-light);
+}
+
+/* ── 4. grid-column: span ── */
+/* C spans columns 1–2 */
+.btn-clear {
+  grid-column: span 2;
+}
+
+/* 0 spans columns 1–3 */
+.btn-zero {
+  grid-column: span 3;
+}
+
+/* ── 8. justify-self — override for the 0 button label ── */
+/* 0 is wide, so nudge its text to the center of the wide cell */
+.btn-zero {
+  justify-self: stretch;  /* stretch the button, center the text below */
+}
+
+/* ── 9. align-self — keep alloperator buttons vertically centered ── */
+.btn-operator {
+  align-self: stretch;
+}
+
+/* ── 11. :hover pseudo-class ── */
+.btn-number:hover,
+.btn-utility:hover {
+  filter: brightness(0.92);
+}
+
+.btn-operator:hover {
+  filter: brightness(1.15);
+}
+
+/* ── 12. :active pseudo-class ── */
+.btn-number:active,
+.btn-utility:active {
+  filter: brightness(0.75);
+}
+
+.btn-operator:active {
+  filter: brightness(0.80);
+}
